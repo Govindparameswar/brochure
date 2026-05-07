@@ -1518,6 +1518,17 @@ button {
     padding: 1rem 1.25rem;
   }
 
+  .nav.menu-open {
+    backdrop-filter: none !important;
+    -webkit-backdrop-filter: none !important;
+    background: transparent !important;
+    box-shadow: none !important;
+  }
+  .nav__logo,
+  .nav__hamburger {
+    position: relative;
+    z-index: 9999;
+  }
   .nav__links {
     display: none;
     position: fixed;
@@ -1525,9 +1536,7 @@ button {
     left: 0;
     right: 0;
     bottom: 0;
-    background: rgba(10, 31, 26, 0.96);
-    backdrop-filter: blur(20px);
-    -webkit-backdrop-filter: blur(20px);
+    background: var(--clr-bg-deep);
     flex-direction: column;
     justify-content: center;
     align-items: center;
@@ -1624,7 +1633,7 @@ button {
 /* ---------- Pricing Section ---------- */
 .pricing__container {
   width: 100%;
-  overflow-x: auto;
+
   margin-top: var(--gap-md);
   padding: 0 1rem;
 }
@@ -1638,10 +1647,12 @@ button {
   -webkit-backdrop-filter: blur(16px);
   max-width: 900px;
   margin: 0 auto;
+  overflow-x: auto;
 }
 
 .pricing__table {
   width: 100%;
+  min-width: 600px;
   border-collapse: collapse;
   text-align: left;
 }
@@ -1693,20 +1704,29 @@ button {
 }
 
 @media (max-width: 768px) {
+  .pricing__table {
+    min-width: 0;
+  }
   .pricing__table th,
   .pricing__table td {
-    padding: 1rem 0.5rem;
+    padding: 0.75rem 0.25rem;
   }
   .pricing__table th {
-    font-size: 1.1rem;
+    font-size: 0.9rem;
   }
   .pricing__table td {
-    font-size: 0.9rem;
+    font-size: 0.8rem;
+  }
+  .pricing__table td strong {
+    font-size: 0.95rem;
   }
   .price-tag {
     display: block;
-    margin: 0.5rem 0;
+    margin: 0.25rem 0;
     text-align: center;
+    font-size: 0.75rem;
+    padding: 0.3rem 0.5rem;
+    white-space: normal;
   }
 }
 

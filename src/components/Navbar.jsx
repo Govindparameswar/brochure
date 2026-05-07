@@ -27,7 +27,7 @@ export default function Navbar({ forceScrolled = false }) {
   }
 
   return (
-    <nav className={`nav${scrolled ? ' scrolled' : ''}`} id="navbar" aria-label="Main navigation">
+    <nav className={`nav${scrolled ? ' scrolled' : ''}${menuOpen ? ' menu-open' : ''}`} id="navbar" aria-label="Main navigation">
       <Link to="/" className="nav__logo">Merry Land <span>Ayurvedic Centre</span></Link>
       <ul className={`nav__links${menuOpen ? ' open' : ''}`} id="nav-links">
         {location.pathname === '/book' && <li><Link to="/" onClick={closeMenu}>Home</Link></li>}
