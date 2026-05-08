@@ -1,5 +1,5 @@
 import { motion } from 'framer-motion'
-import { fadeUp, staggerContainer, viewportOptions } from '../hooks/useAnimations'
+import { fadeUp, viewportOptions } from '../hooks/useAnimations'
 
 const rows = [
   { name: 'Signature Panchakarma Detox', bestFor: 'Full body detox, immunity, anti-ageing', prices: ['7 Days: ₹46,000', '14 Days: ₹91,000', '21 Days: ₹1,36,000', '28 Days: ₹1,83,000'] },

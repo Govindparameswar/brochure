@@ -1,5 +1,5 @@
 import { motion } from 'framer-motion'
-import { fadeUp, fadeLeft, fadeRight, viewportOptions } from '../hooks/useAnimations'
+import { fadeUp, viewportOptions } from '../hooks/useAnimations'
 
 export default function Doctor() {
   return (

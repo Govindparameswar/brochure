@@ -1,6 +1,5 @@
 import { useEffect, useRef } from 'react'
 import { motion } from 'framer-motion'
-import { fadeUp } from '../hooks/useAnimations'
 
 export default function Hero() {
   const bgRef = useRef(null)

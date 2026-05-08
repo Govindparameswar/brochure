@@ -1,5 +1,5 @@
 import { motion } from 'framer-motion'
-import { fadeUp, fadeLeft, fadeRight, staggerContainer, viewportOptions } from '../hooks/useAnimations'
+import { fadeUp, fadeRight, staggerContainer, viewportOptions } from '../hooks/useAnimations'
 
 export default function Panchakarma() {
   return (
