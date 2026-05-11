@@ -6,13 +6,21 @@ export default function Hero() {
   const particlesRef = useRef(null)
 
   useEffect(() => {
-    // Parallax
+    // Parallax — desktop only, rAF-throttled for smooth 60fps
+    let rafId = null
+    const isMobile = window.matchMedia('(max-width: 1024px)').matches
     const onScroll = () => {
-      if (bgRef.current && window.scrollY < window.innerHeight) {
-        bgRef.current.style.transform = `translateY(${window.scrollY * 0.35}px) scale(1.1)`
-      }
+      if (rafId) return
+      rafId = requestAnimationFrame(() => {
+        if (bgRef.current && window.scrollY < window.innerHeight) {
+          bgRef.current.style.transform = `translateY(${window.scrollY * 0.35}px) scale(1.1)`
+        }
+        rafId = null
+      })
     }
-    window.addEventListener('scroll', onScroll, { passive: true })
+    if (!isMobile) {
+      window.addEventListener('scroll', onScroll, { passive: true })
+    }
 
     // Floating leaves
     const container = particlesRef.current
@@ -29,8 +37,8 @@ export default function Hero() {
       container.appendChild(leaf)
       setTimeout(() => leaf.parentNode && leaf.parentNode.removeChild(leaf), 30000)
     }
-    for (let i = 0; i < 12; i++) setTimeout(createLeaf, i * 800)
-    const interval = setInterval(createLeaf, 3000)
+    for (let i = 0; i < 25; i++) setTimeout(createLeaf, i * 500)
+    const interval = setInterval(createLeaf, 1500)
     return () => { window.removeEventListener('scroll', onScroll); clearInterval(interval) }
   }, [])
 

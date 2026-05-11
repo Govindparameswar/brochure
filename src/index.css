@@ -289,14 +289,15 @@ button {
   height: 100%;
   object-fit: cover;
   object-position: center 40%;
+  will-change: transform;
 }
 
 .hero__overlay {
   position: absolute;
   inset: 0;
-  background: linear-gradient(rgba(0,0,0,0.45), rgba(0,0,0,0.55)),
-              radial-gradient(circle at center, rgba(193, 167, 103, 0.15) 0%, transparent 60%);
-  box-shadow: inset 0 0 150px rgba(0,0,0,0.6);
+  background: linear-gradient(rgba(0,0,0,0.6), rgba(0,0,0,0.7)),
+              radial-gradient(circle at center, rgba(193, 167, 103, 0.1) 0%, transparent 60%);
+  box-shadow: inset 0 0 200px rgba(0,0,0,0.5);
   z-index: 1;
 }
 
@@ -313,8 +314,8 @@ button {
   position: absolute;
   width: 20px;
   height: 20px;
-  opacity: 0.15;
-  animation: floatLeaf linear infinite;
+  opacity: 0;
+  animation: floatLeaf linear infinite backwards;
 }
 
 .leaf svg {
@@ -778,14 +779,14 @@ button {
 
 .about__image-badge {
   position: absolute;
-  bottom: -16px;
-  right: -16px;
+  bottom: -12px;
+  right: 0;
   background: var(--clr-bg-glass);
   backdrop-filter: blur(16px);
   -webkit-backdrop-filter: blur(16px);
   border: 1px solid var(--clr-border-glass);
   border-radius: var(--radius-md);
-  padding: 1rem 1.25rem;
+  padding: 1rem 1.5rem;
   text-align: center;
 }
 
@@ -1525,8 +1526,7 @@ button {
 
   .about__image-badge {
     bottom: -10px;
-    right: -10px;
-    padding: 1rem 1.25rem;
+    right: 0;
   }
 
   .timeline__line {
@@ -1691,8 +1691,8 @@ button {
   }
 
   .about__image-badge {
-    bottom: -10px;
-    right: 10px;
+    bottom: -8px;
+    right: 0;
     padding: 0.75rem 1rem;
   }
 
