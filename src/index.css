@@ -283,18 +283,24 @@ button {
   width: 100%;
   height: 100%;
   object-fit: cover;
-  filter: brightness(0.35) saturate(0.8);
+  object-position: center center;
+}
+
+@media (max-width: 768px) {
+  .hero__bg {
+    background-color: var(--clr-bg-deep);
+  }
+  .hero__bg img {
+    object-fit: contain;
+  }
 }
 
 .hero__overlay {
   position: absolute;
   inset: 0;
-  background: linear-gradient(
-    180deg,
-    rgba(10, 31, 26, 0.4) 0%,
-    rgba(10, 31, 26, 0.65) 50%,
-    var(--clr-bg-deep) 100%
-  );
+  background: linear-gradient(rgba(0,0,0,0.45), rgba(0,0,0,0.55)),
+              radial-gradient(circle at center, rgba(193, 167, 103, 0.15) 0%, transparent 60%);
+  box-shadow: inset 0 0 150px rgba(0,0,0,0.6);
   z-index: 1;
 }
 
