@@ -2,6 +2,7 @@ import { useState, useEffect } from 'react'
 import Navbar from '../components/Navbar'
 import Footer from '../components/Footer'
 import WhatsAppButton from '../components/WhatsAppButton'
+import FloatingBookNow from '../components/FloatingBookNow'
 
 export default function Book() {
   const [submitting, setSubmitting] = useState(false)
@@ -96,6 +97,7 @@ export default function Book() {
       </section>
       <Footer />
       <WhatsAppButton />
+      <FloatingBookNow />
     </>
   )
 }

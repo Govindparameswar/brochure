@@ -8,6 +8,7 @@ import Pricing from '../components/Pricing'
 import CTA from '../components/CTA'
 import Footer from '../components/Footer'
 import WhatsAppButton from '../components/WhatsAppButton'
+import FloatingBookNow from '../components/FloatingBookNow'
 
 export default function Home() {
   return (
@@ -22,6 +23,7 @@ export default function Home() {
       <CTA />
       <Footer />
       <WhatsAppButton />
+      <FloatingBookNow />
     </>
   )
 }

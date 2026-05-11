@@ -67,6 +67,8 @@ html {
   font-size: 16px;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+  -webkit-text-size-adjust: 100%;
+  text-size-adjust: 100%;
 }
 
 body {
@@ -80,6 +82,7 @@ body {
 
 img {
   max-width: 100%;
+  height: auto;
   display: block;
 }
 
@@ -213,6 +216,7 @@ button {
 .section {
   padding: var(--section-padding);
   position: relative;
+  overflow-x: clip;
 }
 
 .section__label {
@@ -266,6 +270,7 @@ button {
 .hero {
   position: relative;
   min-height: 100vh;
+  min-height: 100dvh;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -283,16 +288,7 @@ button {
   width: 100%;
   height: 100%;
   object-fit: cover;
-  object-position: center center;
-}
-
-@media (max-width: 768px) {
-  .hero__bg {
-    background-color: var(--clr-bg-deep);
-  }
-  .hero__bg img {
-    object-fit: contain;
-  }
+  object-position: center 40%;
 }
 
 .hero__overlay {
@@ -665,13 +661,17 @@ button {
 
 .about__content {
   display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: var(--gap-xl);
+  grid-template-columns: 1.2fr 1fr;
+  gap: clamp(2rem, 5vw, 5rem);
   align-items: center;
+  max-width: 1400px;
+  margin: 0 auto;
 }
 
 .about__text {
   max-width: 540px;
+  word-break: break-word;
+  overflow-wrap: break-word;
 }
 
 .about__story {
@@ -756,6 +756,8 @@ button {
   display: flex;
   justify-content: center;
   align-items: center;
+  overflow: visible;
+  min-width: 0;
 }
 
 .about__image-frame {
@@ -776,14 +778,14 @@ button {
 
 .about__image-badge {
   position: absolute;
-  bottom: -20px;
-  right: -20px;
+  bottom: -16px;
+  right: -16px;
   background: var(--clr-bg-glass);
   backdrop-filter: blur(16px);
   -webkit-backdrop-filter: blur(16px);
   border: 1px solid var(--clr-border-glass);
   border-radius: var(--radius-md);
-  padding: 1.25rem 1.5rem;
+  padding: 1rem 1.25rem;
   text-align: center;
 }
 
@@ -1450,8 +1452,61 @@ button {
    RESPONSIVE
    =================================================== */
 
-/* Tablet */
+/* ---------- Ultra-wide (1440px+) ---------- */
+@media (min-width: 1441px) {
+  .nav {
+    padding: 1.25rem clamp(2rem, 4vw, 6rem);
+  }
+
+  .hero__content {
+    max-width: 900px;
+  }
+
+  .hero__title {
+    font-size: clamp(3.5rem, 5vw, 5.5rem);
+  }
+
+  .about__content {
+    gap: var(--gap-xl);
+  }
+
+  .about__image-frame {
+    max-width: 480px;
+  }
+}
+
+/* ---------- Mid Desktop (1200px) ---------- */
+@media (max-width: 1200px) {
+  .about__content {
+    grid-template-columns: 1fr;
+    gap: var(--gap-lg);
+    max-width: none;
+  }
+
+  .about__visual {
+    order: -1;
+    justify-content: center;
+  }
+
+  .about__text {
+    max-width: 100%;
+  }
+
+  .about__image-frame {
+    max-width: 380px;
+  }
+}
+
+/* ---------- Laptop / Small Desktop (1024px) ---------- */
 @media (max-width: 1024px) {
+  .nav__links {
+    gap: 1.25rem;
+  }
+
+  .nav__links a {
+    font-size: 0.8rem;
+  }
+
   .treatments__grid {
     grid-template-columns: repeat(2, 1fr);
   }
@@ -1464,18 +1519,14 @@ button {
     grid-template-columns: repeat(3, 1fr);
   }
 
-  .about__content {
-    grid-template-columns: 1fr;
-    gap: var(--gap-lg);
-  }
-
-  .about__visual {
-    order: -1;
-    justify-content: center;
-  }
-
   .about__image-frame {
-    max-width: 360px;
+    max-width: 340px;
+  }
+
+  .about__image-badge {
+    bottom: -10px;
+    right: -10px;
+    padding: 1rem 1.25rem;
   }
 
   .timeline__line {
@@ -1512,16 +1563,20 @@ button {
     align-self: start;
     margin-top: 1rem;
   }
+
+  .hero__bg img {
+    object-position: center 35%;
+  }
 }
 
-/* Mobile */
+/* ---------- Tablet (768px) ---------- */
 @media (max-width: 768px) {
   :root {
-    --section-padding: 3.5rem 1.25rem;
+    --section-padding: clamp(2.5rem, 8vw, 3.5rem) clamp(1rem, 4vw, 1.5rem);
   }
 
   .nav {
-    padding: 1rem 1.25rem;
+    padding: 0.85rem 1.25rem;
   }
 
   .nav.menu-open {
@@ -1530,11 +1585,17 @@ button {
     background: transparent !important;
     box-shadow: none !important;
   }
+
+  .nav__logo {
+    font-size: 1.25rem;
+  }
+
   .nav__logo,
   .nav__hamburger {
     position: relative;
     z-index: 9999;
   }
+
   .nav__links {
     display: none;
     position: fixed;
@@ -1556,10 +1617,39 @@ button {
 
   .nav__links a {
     font-size: 1.1rem;
+    padding: 0.5rem 0;
   }
 
   .nav__hamburger {
     display: flex;
+  }
+
+  .hero {
+    min-height: 100vh;
+    min-height: 100dvh;
+  }
+
+  .hero__bg img {
+    object-position: center 30%;
+  }
+
+  .hero__title {
+    font-size: clamp(2rem, 8vw, 3rem);
+  }
+
+  .hero__tagline {
+    font-size: 0.7rem;
+    letter-spacing: 0.2em;
+  }
+
+  .hero__desc {
+    font-size: clamp(0.9rem, 2.5vw, 1rem);
+    margin-bottom: 2rem;
+    padding: 0 0.5rem;
+  }
+
+  .hero__content {
+    padding: 0 1.25rem;
   }
 
   .treatments__grid,
@@ -1573,10 +1663,55 @@ button {
 
   .imbalance__grid {
     grid-template-columns: repeat(2, 1fr);
+    gap: var(--gap-sm);
   }
 
-  .hero__title {
-    font-size: clamp(2rem, 8vw, 3rem);
+  .imbalance__card {
+    padding: 1.5rem 1rem;
+  }
+
+  .imbalance__card-title {
+    font-size: 1.15rem;
+  }
+
+  .imbalance__card-desc {
+    font-size: 0.82rem;
+  }
+
+  .treatment__image {
+    height: 180px;
+  }
+
+  .treatment__body {
+    padding: 1.25rem;
+  }
+
+  .treatment__name {
+    font-size: 1.25rem;
+  }
+
+  .about__image-badge {
+    bottom: -10px;
+    right: 10px;
+    padding: 0.75rem 1rem;
+  }
+
+  .about__image-badge .number {
+    font-size: 2rem;
+  }
+
+  .section__title {
+    font-size: clamp(1.75rem, 5vw, 2.5rem);
+  }
+
+  .section__subtitle {
+    font-size: clamp(0.88rem, 2vw, 1rem);
+  }
+
+  .btn {
+    padding: 0.8rem 1.8rem;
+    font-size: 0.8rem;
+    min-height: 44px;
   }
 
   .cta__buttons {
@@ -1588,6 +1723,10 @@ button {
     width: 100%;
     max-width: 280px;
     justify-content: center;
+  }
+
+  .cta__title {
+    font-size: clamp(1.75rem, 5vw, 2.5rem);
   }
 
   .timeline__item {
@@ -1610,11 +1749,202 @@ button {
   .timeline__image-wrap {
     max-width: 100%;
   }
+
+  .footer {
+    padding: 2.5rem 1.25rem 1.5rem;
+  }
+
+  .footer__brand {
+    font-size: 1.1rem;
+  }
+
+  .footer__tagline {
+    font-size: 0.8rem;
+  }
 }
 
+/* ---------- Mobile (480px) ---------- */
 @media (max-width: 480px) {
+  :root {
+    --section-padding: 2.5rem 1rem;
+  }
+
+  .nav {
+    padding: 0.75rem 1rem;
+  }
+
+  .nav__logo {
+    font-size: 1.1rem;
+  }
+
+  .hero__title {
+    font-size: clamp(1.75rem, 9vw, 2.5rem);
+  }
+
+  .hero__tagline {
+    font-size: 0.65rem;
+    letter-spacing: 0.15em;
+    margin-bottom: 1rem;
+  }
+
+  .hero__desc {
+    font-size: 0.88rem;
+    line-height: 1.7;
+  }
+
+  .hero__content {
+    padding: 0 0.75rem;
+  }
+
   .imbalance__grid {
     grid-template-columns: 1fr;
+  }
+
+  .imbalance__card {
+    padding: 1.25rem 1rem;
+  }
+
+  .about__story {
+    font-size: clamp(1.1rem, 4vw, 1.3rem);
+    padding-left: 1rem;
+  }
+
+  .about__desc {
+    font-size: 0.88rem;
+  }
+
+  .about__highlight {
+    padding: 1rem;
+    gap: 0.75rem;
+  }
+
+  .about__highlight-icon {
+    width: 38px;
+    height: 38px;
+  }
+
+  .about__highlight h4 {
+    font-size: 0.9rem;
+  }
+
+  .about__highlight p {
+    font-size: 0.8rem;
+  }
+
+  .about__image-frame {
+    max-width: 280px;
+  }
+
+  .treatment__image {
+    height: 160px;
+  }
+
+  .treatment__body {
+    padding: 1rem;
+  }
+
+  .treatment__name {
+    font-size: 1.15rem;
+  }
+
+  .treatment__short {
+    font-size: 0.82rem;
+  }
+
+  .treatment__details-inner {
+    padding: 0 1rem 1rem;
+  }
+
+  .treatment__details-inner p {
+    font-size: 0.82rem;
+  }
+
+  .treatment__details-inner ul li {
+    font-size: 0.8rem;
+  }
+
+  .section__title {
+    font-size: clamp(1.5rem, 6vw, 2rem);
+  }
+
+  .section__label {
+    font-size: 0.65rem;
+  }
+
+  .btn {
+    padding: 0.75rem 1.5rem;
+    font-size: 0.78rem;
+  }
+
+  .cta__subtitle {
+    font-size: 0.9rem;
+  }
+
+  .doctor__avatar {
+    width: 100px;
+    height: 100px;
+  }
+
+  .doctor__name {
+    font-size: 1.1rem;
+  }
+
+  .footer {
+    padding: 2rem 1rem 1.25rem;
+  }
+
+  .footer__tagline {
+    font-size: 0.75rem;
+    line-height: 1.6;
+  }
+}
+
+/* ---------- Small Mobile (320px) ---------- */
+@media (max-width: 320px) {
+  :root {
+    --section-padding: 2rem 0.75rem;
+  }
+
+  .nav__logo {
+    font-size: 1rem;
+  }
+
+  .hero__title {
+    font-size: clamp(1.5rem, 10vw, 2rem);
+  }
+
+  .hero__tagline {
+    font-size: 0.6rem;
+  }
+
+  .hero__desc {
+    font-size: 0.82rem;
+  }
+
+  .btn {
+    padding: 0.65rem 1.25rem;
+    font-size: 0.75rem;
+  }
+
+  .section__title {
+    font-size: clamp(1.35rem, 7vw, 1.75rem);
+  }
+
+  .about__story {
+    font-size: 1rem;
+  }
+
+  .imbalance__card {
+    padding: 1rem 0.75rem;
+  }
+
+  .imbalance__icon {
+    width: 44px;
+    height: 44px;
+  }
+
+  .imbalance__card-title {
+    font-size: 1.05rem;
   }
 }
 
@@ -1654,6 +1984,7 @@ button {
   max-width: 900px;
   margin: 0 auto;
   overflow-x: auto;
+  -webkit-overflow-scrolling: touch;
 }
 
 .pricing__table {
@@ -1710,6 +2041,9 @@ button {
 }
 
 @media (max-width: 768px) {
+  .pricing__table-wrapper {
+    padding: 1rem;
+  }
   .pricing__table {
     min-width: 0;
   }
@@ -1733,6 +2067,31 @@ button {
     font-size: 0.75rem;
     padding: 0.3rem 0.5rem;
     white-space: normal;
+  }
+}
+
+@media (max-width: 480px) {
+  .pricing__container {
+    padding: 0;
+  }
+  .pricing__table-wrapper {
+    padding: 0.75rem;
+    border-radius: var(--radius-sm);
+  }
+  .pricing__table th,
+  .pricing__table td {
+    padding: 0.6rem 0.2rem;
+    font-size: 0.75rem;
+  }
+  .pricing__table th {
+    font-size: 0.8rem;
+  }
+  .pricing__table td strong {
+    font-size: 0.85rem;
+  }
+  .price-tag {
+    font-size: 0.7rem;
+    padding: 0.25rem 0.4rem;
   }
 }
 
@@ -1785,6 +2144,65 @@ button {
   }
 }
 
+@media (max-width: 480px) {
+  .floating-whatsapp {
+    bottom: 1.25rem;
+    right: 1rem;
+    width: 46px;
+    height: 46px;
+  }
+  .floating-whatsapp svg {
+    width: 24px;
+    height: 24px;
+  }
+}
+
+/* ===================================================
+   FLOATING BOOK NOW
+   =================================================== */
+.floating-book {
+  display: none;
+}
+
+@media (max-width: 768px) {
+  .floating-book {
+    position: fixed;
+    bottom: 1.5rem;
+    left: 1.5rem;
+    background: linear-gradient(135deg, var(--clr-gold), var(--clr-gold-dark));
+    color: var(--clr-bg-deep);
+    border-radius: var(--radius-full);
+    padding: 0 1.25rem;
+    height: 50px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-shadow: 0 4px 12px rgba(193, 167, 103, 0.3);
+    z-index: 9999;
+    font-family: var(--ff-sans);
+    font-weight: 600;
+    font-size: 0.9rem;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    transition: all var(--dur-mid) var(--ease-smooth);
+    text-decoration: none;
+  }
+  
+  .floating-book:active {
+    transform: scale(0.95);
+  }
+}
+
+@media (max-width: 480px) {
+  .floating-book {
+    bottom: 1.25rem;
+    left: 1rem;
+    height: 46px;
+    font-size: 0.8rem;
+    padding: 0 1rem;
+  }
+}
+
 /* ===================================================
    BOOKING PAGE
    =================================================== */
@@ -1809,20 +2227,28 @@ button {
   margin: 0 auto;
 }
 .booking-header { text-align: center; margin-bottom: 2rem; }
-.booking-title { font-family: var(--ff-serif); font-size: 2.5rem; color: var(--clr-white); margin-bottom: 0.5rem; }
+.booking-title { font-family: var(--ff-serif); font-size: clamp(1.75rem, 5vw, 2.5rem); color: var(--clr-white); margin-bottom: 0.5rem; }
 .booking-subtitle { color: var(--clr-text-muted); font-size: 0.95rem; }
 .form-group { margin-bottom: 1.5rem; }
 .form-label { display: block; font-family: var(--ff-sans); font-size: 0.85rem; color: var(--clr-gold); margin-bottom: 0.5rem; text-transform: uppercase; letter-spacing: 0.05em; }
-.form-control { width: 100%; background: rgba(10,31,26,0.6); border: 1px solid var(--clr-border-glass); color: var(--clr-text); padding: 1rem; border-radius: var(--radius-sm); font-family: var(--ff-body); font-size: 1rem; transition: all var(--dur-fast) var(--ease-smooth); box-sizing: border-box; }
+.form-control { width: 100%; background: rgba(10,31,26,0.6); border: 1px solid var(--clr-border-glass); color: var(--clr-text); padding: 1rem; border-radius: var(--radius-sm); font-family: var(--ff-body); font-size: 1rem; transition: all var(--dur-fast) var(--ease-smooth); box-sizing: border-box; min-height: 48px; -webkit-appearance: none; }
 .form-control:focus { outline: none; border-color: var(--clr-gold); background: rgba(10,31,26,0.8); box-shadow: 0 0 0 2px rgba(193,167,103,0.15); }
 .form-control::placeholder { color: var(--clr-text-dim); }
 select.form-control { appearance: none; background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='16' height='16' viewBox='0 0 24 24' fill='none' stroke='%23c1a767' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpolyline points='6 9 12 15 18 9'%3E%3C/polyline%3E%3C/svg%3E"); background-repeat: no-repeat; background-position: right 1rem center; padding-right: 3rem; }
 select.form-control option { background: var(--clr-bg-deep); color: var(--clr-text); }
 textarea.form-control { resize: vertical; min-height: 120px; }
 input[type="date"]::-webkit-calendar-picker-indicator { filter: invert(0.8) sepia(0.5) hue-rotate(5deg) saturate(2); cursor: pointer; }
-.booking-submit { width: 100%; margin-top: 1rem; justify-content: center; }
+.booking-submit { width: 100%; margin-top: 1rem; justify-content: center; min-height: 48px; }
 .form-message { margin-top: 1rem; text-align: center; font-size: 0.95rem; padding: 0.75rem; border-radius: var(--radius-sm); }
 .form-message--success { background: rgba(37,211,102,0.1); color: #25d366; border: 1px solid #25d366; }
 .form-message--error { background: rgba(239,68,68,0.1); color: #ef4444; border: 1px solid #ef4444; }
-@media (max-width: 768px) { .booking-container { margin: 0 auto; padding: 2.5rem 1.5rem; } }
-@media (max-width: 480px) { .booking-container { margin: 0 auto; padding: 2rem 1rem; } .booking-section { padding-top: 100px; } }
+@media (max-width: 768px) {
+  .booking-section { padding: 100px 1rem 2rem; }
+  .booking-container { margin: 0 auto; padding: 2.5rem 1.5rem; }
+  .form-control { font-size: 16px; }
+}
+@media (max-width: 480px) {
+  .booking-section { padding-top: 90px; }
+  .booking-container { margin: 0 auto; padding: 2rem 1rem; }
+  .booking-title { font-size: clamp(1.5rem, 6vw, 2rem); }
+}
